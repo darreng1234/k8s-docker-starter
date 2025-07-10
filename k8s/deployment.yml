@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-app
+  namespace: demo-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-app
+  template:
+    metadata:
+      labels:
+        app: python-app
+    spec:
+      containers:
+      - name: python-app
+        image: darrengmz25/minikube:mem-issue-python-app-v2
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            memory: "200Mi"
+            cpu: "50m"
+          limits:
+            memory: "250Mi"
